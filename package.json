@@ -1,0 +1,63 @@
+{
+  "name": "@mechanicalhuman/hnp-squarespace",
+  "version": "1.0.0",
+  "description": "Squarespace template for hiddennodeproblem.com",
+  "homepage": "https://github.com/MechanicalHuman/dev-squarespace-local#readme",
+  "bugs": {
+    "url": "https://github.com/MechanicalHuman/dev-squarespace-local/issues"
+  },
+  "license": "MIT",
+  "author": "Jorge Proaño <jorge@hiddennodeproblem.com> (https://www.hidden-node-problem.com/)",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MechanicalHuman/dev-squarespace-local.git"
+  },
+  "scripts": {
+    "prebuild": "rm -rf template/*",
+    "build": "npm-run-all --parallel build:*  --silent",
+    "build:assets": "scripts/assets.sh",
+    "build:css": "scripts/styles.sh",
+    "build:js": "scripts/javascript.sh",
+    "build:template": "scripts/template.sh",
+    "reload": "scripts/reload.sh",
+    "serve": "scripts/serve.sh",
+    "start": "npm-run-all todos build --parallel serve watch reload --silent",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "todos": "scripts/todos.sh",
+    "watch": "npm-run-all --parallel watch:* --silent",
+    "watch:css": "scripts/styles.sh --watch",
+    "watch:js": "scripts/javascript.sh --watch",
+    "watch:template": "scripts/watch.sh"
+  },
+  "config": {
+    "reload_port": "9000",
+    "reload_ui_port": "9001",
+    "server_port": "8080",
+    "squarespace_auth": false,
+    "squarespace_url": "https://jorge-proao-rb8e.squarespace.com"
+  },
+  "dependencies": {
+    "@squarespace/squarespace-server": "^0.4.3",
+    "autoprefixer": "^6.3.7",
+    "babel-preset-es2015": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.13.0",
+    "browser-sync-logger": "^1.0.3",
+    "browserify": "^13.1.0",
+    "debug": "^2.2.0",
+    "leasot": "^3.2.2",
+    "less": "^2.7.1",
+    "less-plugin-autoprefix": "^1.5.1",
+    "lodash": "^4.14.0",
+    "npm-run-all": "^2.3.0",
+    "watch": "^0.19.1",
+    "watchify": "^3.7.0"
+  },
+  "private": false,
+  "standard": {
+    "globals": [
+      "SQS"
+    ]
+  }
+}

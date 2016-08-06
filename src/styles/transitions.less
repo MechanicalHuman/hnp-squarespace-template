@@ -1,0 +1,30 @@
+// TODO: Transition size. Maybe use max-size
+.main-content {
+  transition: opacity @transition-long;
+
+  opacity: 1;
+
+  &.loading {
+    opacity: 0;
+  }
+}
+
+.slide-up {
+  transform: translateZ(0);
+
+  animation: moveup 1.2s cubic-bezier(0.33, 0, 0.2, 1);
+
+  z-index: 1;
+
+  will-change: transform;
+}
+
+.slide-into-view {
+  transform: translateZ(0);
+
+  animation: slideintoview 0.5s cubic-bezier(0.33, 0, 0.2, 1);
+
+  z-index: 1;
+
+  will-change: transform;
+}

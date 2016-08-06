@@ -1,0 +1,26 @@
+<div class="overflow-wrapper">
+  <div id="site" class="site-container">
+
+    <div id="content" class="content-container">
+      {# Element -- Banner }
+      {@|apply banner.block}
+      {# Select the rigth controller based on the collection.typeName }
+      {# sqs-controller=@template > }
+      {@|apply collection-controller.block}
+      {.equal? collection.typeName "page"}
+      <!-- OpenBlock Header Disabled -->
+      {.or}
+      <!-- OpenBlock Header Enabled -->
+      <squarespace:block-field class="collection-header" id="collection-header-{collection.id}" columns="12" label="Collection Header Content" />
+      {.end}
+      <div class="main-content" data-content-field="main-content">
+        <!-- Squarespace mainContent -->
+        {squarespace.main-content}
+      </div>
+      <squarespace:folder-navigation template="navigation-folder" />
+    </main>
+    <footer id="footer" class="main-footer" role="contentinfo">
+      {@|apply footer.block}
+    </footer>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+/* ------------- sqs-grid-breaker.less ----------------- */
+// Standard styles to 'break' the layout engine grid on small mobile devices.
+
+.sqs-layout {
+  [class*=sqs-col] {
+    float: none !important;
+    width: auto !important;
+  }
+
+  .spacer-block {
+    display: none;
+  }
+
+  // removes bottom vgrid padding at the top of layouts
+  .sqs-row .sqs-block:first-child {
+    padding-top: @vgrid/2 !important;
+  }
+
+  // re-adds bottom vgrid padding at the bottom of layouts
+  .sqs-row .sqs-block:last-child {
+    padding-bottom: @vgrid/2 !important;
+  }
+
+  .sqs-row + .sqs-row,
+  .sqs-row + .sqs-block {
+    margin-top: 0 !important;
+  }
+}
+
+// gallery block styles
+
+.sqs-gallery-design-grid-slide {
+  width: 50% !important;
+  clear: none !important;
+}

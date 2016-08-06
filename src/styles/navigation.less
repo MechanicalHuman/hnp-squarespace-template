@@ -1,0 +1,146 @@
+@navigation-margin: 15px;
+
+
+.main-navigation {
+  .sans-condensed-ligth;
+  .flex-column;
+  // .mobile({
+  //   font-size: 22px;
+  // });
+
+  box-sizing: border-box;
+
+  transition: background-color @transition linear, color @transition linear;
+
+  background-color: @bgColor;
+
+  width: 100vw;
+
+  height: @bars-heigth;
+
+  font-size: 18px;
+
+  .navigation {
+    .flex-row;
+
+    box-sizing: border-box;
+
+    justify-content: space-between;
+
+    padding-right: @navigation-margin;
+    padding-left: @navigation-margin;
+
+    width: inherit;
+
+    height: 100%;
+  }
+
+  .brand {
+    .no-flex;
+
+    transform: rotate(0deg);
+    transition-property: transform, fill;
+    transition-duration: @transition;
+    transition-timing-function: linear;
+    transition-delay: @transition-short;
+
+    cursor: pointer !important;
+
+    width: round(@bars-heigth * 0.66);
+
+    height: round(@bars-heigth * 0.66);
+
+    fill: @textColor;
+
+    svg {
+      .status-hover({
+        transform: scale(1.02);
+      });
+      .status-active({
+        transform: scale(0.95);
+      });
+
+      transition-property: transform;
+      transition-duration: @transition-short;
+      transition-timing-function: linear;
+
+      width: 100%;
+
+      height: 100%;
+    }
+
+    &.spin {
+      animation: spin 2s infinite linear;
+    }
+  }
+
+  .nav-wrap {
+    .flex-row;
+    .reset-margins;
+
+    box-sizing: border-box;
+
+    flex-grow: 1;
+    justify-content: flex-end;
+
+    width: 100vw;
+
+    min-height: @bars-heigth;
+
+    text-transform: uppercase;
+
+    letter-spacing: -0.02rem;
+
+    list-style-type: none;
+  }
+
+  .nav-element {
+    .flex-column;
+    .no-flex;
+    .status-hover({
+      opacity: 1;
+      .nav-under {
+        width: 100%;
+      }
+    });
+    .status-active({
+      transform: scale(0.98);
+      .nav-under {
+        width: 100%;
+      }
+    });
+
+    box-sizing: border-box;
+
+    opacity: 0.6;
+
+    margin-right: @navigation-margin;
+
+    cursor: pointer !important;
+    &:last-child {
+      margin-right: unset;
+    }
+
+    .nav-item {
+      transform: translate3d(0, 0, 0);
+    }
+
+    &.active {
+      opacity: 1;
+
+      .nav-under {
+        width: calc(100% + 5px);
+      }
+    }
+
+    .nav-under {
+      transition: width @transition-short ease-out;
+
+      background-color: @textColor;
+
+      width: 0;
+
+      height: 2px;
+    }
+  }
+}

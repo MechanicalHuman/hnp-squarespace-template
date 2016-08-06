@@ -1,0 +1,100 @@
+/* Active, Focus, Hover*/
+.status-active(@rules) {
+  body.no-touch & {
+    &:active {
+      @rules();
+    }
+  }
+}
+
+.status-hover(@rules) {
+  body.no-touch & {
+    &:hover,
+    &:focus {
+      @rules();
+    }
+  }
+}
+
+/* Links */
+.click(@color: @linkColor) {
+  .status-hover({
+    color: @color;
+
+    fill: @color;
+  });
+  .status-active({
+    transform: translateY(1px);
+
+    color: @color;
+
+    fill: @color;
+  });
+
+  cursor: pointer !important;
+}
+
+/* FLEX MIXINS */
+.flex {
+  display: flex;
+
+  flex-wrap: nowrap;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.no-flex {
+  display: flex;
+
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.flex-row {
+  .flex;
+
+  flex-direction: row;
+}
+
+.flex-column {
+  .flex;
+
+  flex-direction: column;
+}
+
+/* AJAX Loading */
+
+.loading(@rules) {
+  body[data-ajax-loader='loading'] & {
+    @rules();
+  }
+}
+
+/* Mobile Safari */
+.mobilesafari(@rules) {
+  html.mobilesafari & {
+    @rules();
+  }
+}
+
+
+.mobile(@rules) {
+  @media only screen and (max-width: 768px) {
+    @rules();
+  }
+  // @media only screen and (max-width: 640px) {
+  //   @rules();
+  // }
+}
+
+
+/* min heigth */
+
+.min-vertical {
+  .mobilesafari({
+    min-height: calc(~'~"100vh - @{bars-heigth}"');
+  });
+
+  min-height: calc(~'~"100vh - (@{bars-heigth} * 2)"');
+}

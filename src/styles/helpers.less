@@ -1,0 +1,73 @@
+// Hide from both screenreaders and browsers: h5bp.com/u
+.hidden {
+  display: none !important;
+
+  visibility: hidden;
+}
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+.visuallyhidden {
+  position: absolute;
+
+  margin: -1px;
+
+  border: 0;
+
+  padding: 0;
+
+  width: 1px;
+
+  height: 1px;
+
+  overflow: hidden;
+
+  clip: rect(0 0 0 0);
+}
+
+// Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  position: static;
+
+  margin: 0;
+
+  width: auto;
+
+  height: auto;
+
+  overflow: visible;
+
+  clip: auto;
+}
+
+// Hide visually and from screenreaders, but maintain layout
+.invisible {
+  visibility: hidden;
+}
+
+// Hide imageLoader images that have no src
+img[data-src]:not([src]) {
+  visibility: hidden;
+}
+
+
+.reset-margins {
+  margin: 0;
+
+  border: 0;
+
+  padding: 0;
+
+  line-height: 1;
+
+  font-style: normal;
+}
+
+.selectable {
+  user-select: text;
+  &::selection {
+    background-color: @selection;
+
+    color: black;
+  }
+}

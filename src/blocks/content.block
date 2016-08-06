@@ -1,0 +1,8 @@
+<!-- TODO: Collection type -->
+<!-- TODO: Hero Image -->
+<!-- TODO: Footer???-->
+<article id="page" data-content-field="main-content">
+      <!-- Squarespace mainContent -->
+      {squarespace.main-content}
+</article>
+<!-- FIXME: sqs-gallery-container ???  -->

@@ -1,0 +1,68 @@
+@import 'variables';
+@import 'mixins';
+@import 'helpers';
+
+@import 'animations';
+@import 'transitions';
+
+@import 'fonts';
+@import 'typography';
+
+@import 'footer';
+@import 'navigation';
+@import 'archive';
+
+@import 'print';
+
+body {
+  .serif-regular;
+
+  box-sizing: border-box;
+
+  background-color: @bgColor;
+
+  width: 100vw;
+  max-width: 100vw;
+
+  min-height: 100vh;
+
+  overflow-x: hidden !important;
+
+  text-rendering: optimizeLegibility;
+  text-size-adjust: none;
+
+  color: @textColor;
+
+  -webkit-font-smoothing: antialiased;
+  image-rendering: auto;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: @transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+iframe {
+  .reset-margins;
+}
+.main-content {
+  .min-vertical;
+
+  background-color: @bgColor;
+
+  overflow-x: hidden !important;
+  // overflow: hidden;
+}

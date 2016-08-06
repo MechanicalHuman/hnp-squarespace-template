@@ -1,0 +1,9 @@
+{.section website}
+<div class="logo-wrapper" data-content-field="site-title" data-nc-element="branding">
+    <div class="logo-image">
+        <a href="/">
+            <img src="{logoImageUrl}?format=1500w" alt="{siteTitle}" />
+        </a>
+    </div>
+</div>
+{.end}

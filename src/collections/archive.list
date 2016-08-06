@@ -1,0 +1,20 @@
+{.section collection}
+	<div class="archive-wrapper archive-grid" sqs-controller="Controllers.collection.archive" data-collection-id="{collection.id}">
+		{.repeated section collections}
+		<!-- TODO: Encapsulate the thumb as a Block -->
+		<article id="archive-{urlId}" class="archive-item  transition-link" data-item-id="{id}" data-url-id="{urlId}">
+			<a class="archive-item-image-wrap" href="{fullUrl}" {.section mainImage}{.if colorData} style="background-color: #{colorData.suggestedBgColor}" data-color="#{colorData.suggestedBgColor}"{.end}{.end} >
+				<figure class="archive-item-image content-fill">
+					{.section mainImage}
+					<img class="loading" {@|image-meta} />
+					{.end}
+				</figure>
+			</a>
+			<a class="archive-item-meta" href="{fullUrl}">
+				<h2 class="archive-item-title">{title}</h2>
+				<h3 class="archive-item-description">{description}</h3>
+			</a>
+		</article>
+		{.end}
+	</div>
+{.end}

@@ -1,0 +1,15 @@
+<!-- TODO: FIX vcard file -->
+<!-- TODO: Upload correct PublicKey -->
+<nav class="contact" data-content-field="navigation-footerNav">
+    {.repeated section items}
+    {.section collection}
+    <a class="contact-elem" href="{fullUrl}" title="{title}">{navigationTitle}</a>
+    {.end}
+
+    {.section externalLink}
+    <a class="contact-elem" href="{url}"{.section newWindow} target="_blank"{.end} title="{title}">{title}</a>
+    {.end}
+
+    {.end}
+</nav>
+<div class="legal">Hidden Node Problem - ©2016 Jorge Proaño</div>

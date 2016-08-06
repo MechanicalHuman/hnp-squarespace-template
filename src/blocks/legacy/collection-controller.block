@@ -1,0 +1,35 @@
+{.var @type collection.typeName }
+
+{.equal? @type "page"}
+    <!-- templateController: Page -->
+    sqs-controller="Template.Controllers.PageController"
+{.or}
+    {.equal? @type "album"}
+        <!-- templateController: Album -->
+        sqs-controller="Template.Controllers.AlbumController"
+    {.or}
+        {.equal? @type "blog"}
+            <!-- templateController: Blog -->
+            sqs-controller="Template.Controllers.BlogController"
+        {.or}
+            {.equal? @type "events"}
+                <!-- templateController: Events -->
+                sqs-controller="Template.Controllers.EventsController"
+            {.or}
+                {.equal? @type "gallery"}
+                    <!-- templateController: Gallery -->
+                    sqs-controller="Template.Controllers.GalleryController"
+                {.or}
+                    {.equal? @type "products"}
+                        <!-- templateController: Products -->
+                        sqs-controller="Template.Controllers.ProductsController"
+                    {.or}
+<!-- templateController: Default -->
+<main id="page" class="site-page" role="main" sqs-controller="Template.Controllers.DefaultController" >
+                    {.end}
+                {.end}
+            {.end}
+        {.end}
+    {.end}
+{.end}
+
