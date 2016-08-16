@@ -1,6 +1,6 @@
 /* Active, Focus, Hover*/
 .status-active(@rules) {
-  body.no-touch & {
+  html.no-touch & {
     &:active {
       @rules();
     }
@@ -8,7 +8,7 @@
 }
 
 .status-hover(@rules) {
-  body.no-touch & {
+  html.no-touch & {
     &:hover,
     &:focus {
       @rules();
@@ -45,8 +45,6 @@
 }
 
 .no-flex {
-  display: flex;
-
   flex-grow: 0;
   flex-shrink: 0;
 }
@@ -97,4 +95,13 @@
   });
 
   min-height: calc(~'~"100vh - (@{bars-heigth} * 2)"');
+}
+
+.hypens {
+  -webkit-hyphenate-limit-after: 3;
+  -webkit-hyphenate-limit-before: 2;
+  -webkit-hyphenate-limit-lines: 2;
+  hyphens: auto;
+  word-break: break-word;
+  word-wrap: break-word;
 }

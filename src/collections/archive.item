@@ -1,0 +1,7 @@
+{.section item}
+<article class="page-container">
+    <section>
+    {body}
+    </section>
+</article>
+{.end}

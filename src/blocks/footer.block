@@ -1,15 +1,21 @@
-<!-- TODO: FIX vcard file -->
 <!-- TODO: Upload correct PublicKey -->
-<nav class="contact" data-content-field="navigation-footerNav">
+<nav class="contact" data-content-field="navigation-footerNav" sqs-controller='Controllers.footer'>
     {.repeated section items}
-    {.section collection}
-    <a class="contact-elem" href="{fullUrl}" title="{title}">{navigationTitle}</a>
-    {.end}
 
-    {.section externalLink}
-    <a class="contact-elem" href="{url}"{.section newWindow} target="_blank"{.end} title="{title}">{title}</a>
-    {.end}
+        {.section collection}
+    <a class="contact-elem" href="{fullUrl}" title="{title}">{navigationTitle}</a>
+        {.end}
+
+        {.section externalLink}
+    <a class="contact-elem" href="{url}"{.section newWindow} target="_blank"{.end} title="{title}" download>{title}</a>
+        {.end}
+
+    {.alternates with}
+    <!-- TODO: Separator -->
+    <!-- <div class="separator">-</div> -->
 
     {.end}
 </nav>
-<div class="legal">Hidden Node Problem - ©2016 Jorge Proaño</div>
+<div class="legal">
+    Hidden Node Problem - ©2016 Jorge Proaño
+</div>

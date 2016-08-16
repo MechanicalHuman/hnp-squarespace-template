@@ -10,21 +10,38 @@ module.exports = {
   loadImages: loadImages,
   removeClass: removeClass,
   addClass: addClass,
-  emitResize: lodash.throttle(_emitResize, config.debounceTick),
   getViewport: getViewport,
   setOrientation: setOrientation,
   onAnimationEnd: onAnimationEnd,
   onAnimationIteration: onAnimationIteration,
-  getClosest: getClosest
-
+  onResize: _throttledResize()
 }
 
-function loadImages (container = document , options = {load: true}) {
+/**
+ * Load images using the Squarespace Image Loader
+ *
+ * @method    loadImages
+ * @param     {HTMLElement}    container
+ * @param     {Object}        options
+ */
+
+function loadImages (container, options) {
+  if (!container) container = document
+  if (!options) options = {load: true}
   let images = container.querySelectorAll('img[data-src]')
+  if (!images.length) return
   lodash.each(images, image => {
     SQS.ImageLoader.load(image, options)
   })
 }
+
+/**
+ * Removes a class from the given HTMLElement
+ *
+ * @method    removeClass
+ * @param     {HTMLElement}       elem
+ * @param     {String}       className
+ */
 
 function removeClass (elem, className) {
   if (!elem) return
@@ -32,12 +49,27 @@ function removeClass (elem, className) {
   elem.className = elem.className.replace(new RegExp(className, 'g'), '')
 }
 
+/**
+ * Appends a class to the given HTMLElement
+ *
+ * @method    addClass
+ * @param     {HTMLElement}       elem
+ * @param     {String}       className
+ */
+
 function addClass (elem, className) {
   if (!elem) return
   if (!className) return
   removeClass(elem, className)
   elem.className = elem.className + ` ${className}`
 }
+
+/**
+ * Returns the current Viewport Size in pixels
+ *
+ * @method    getViewport
+ * @return    {Object}
+ */
 
 function getViewport () {
   const width = window.innerWidth ||
@@ -51,6 +83,13 @@ function getViewport () {
   return {width: width, height: height}
 }
 
+/**
+ * Appends 'landscape or 'portrait' to the document classes based on the
+ *  current device orientation
+ *
+ * @method    setOrientation
+ */
+
 function setOrientation () {
   let orientation = 'landscape'
   if (window.orientation !== 90 && window.orientation !== -90) {
@@ -61,42 +100,6 @@ function setOrientation () {
   addClass(document.documentElement, orientation)
 }
 
-/* TODO: Discover the usecase of this */
-function getClosest (elem, selector) {
-  var firstChar = selector.charAt(0)
-
-  // Get closest match
-  for (; elem && elem !== document; elem = elem.parentNode) {
-    // If selector is a class
-    if (firstChar === '.') {
-      if (elem.classList.contains(selector.substr(1))) {
-        return elem
-      }
-    }
-
-    // If selector is an ID
-    if (firstChar === '#') {
-      if (elem.id === selector.substr(1)) {
-        return elem
-      }
-    }
-
-    // If selector is a data attribute
-    if (firstChar === '[') {
-      if (elem.hasAttribute(selector.substr(1, selector.length - 2))) {
-        return elem
-      }
-    }
-
-    // If selector is a tag
-    if (elem.tagName.toLowerCase() === selector) {
-      return elem
-    }
-  }
-
-  return false
-}
-
 /**
  * Executes the callback function when the animation has completed.
  *
@@ -105,7 +108,7 @@ function getClosest (elem, selector) {
  *  By Osvaldas Valutis, www.osvaldas.info
  *
  * @method    onAnimationEnd
- * @param     {DOMElement}  element
+ * @param     {HTMLElement}  element
  * @param     {Function}  callback
  */
 
@@ -153,7 +156,7 @@ function onAnimationEnd (element, callback) {
  *  By Osvaldas Valutis, www.osvaldas.info
  *
  * @method    onAnimationEnd
- * @param     {DOMElement}  element
+ * @param     {HTMLElement}  element
  * @param     {Function}  callback
  */
 
@@ -184,15 +187,19 @@ function onAnimationIteration (element, callback) {
   }
 }
 
-/* Private Methods */
-
 /**
- * Emits a resize event with the value of the viewport
+ * Returns a throttled function which emits the resize Event and triggers the
+ *  Squarespace Image Loader on the whole document.
  *
- * @method     _emitResize
+ * @method     _throttledResize
+ * @return     {Function}
  * @private
  */
+function _throttledResize () {
+  return lodash.throttle(emitResize, config.debounceTick)
 
-function _emitResize () {
-  events.emit('resize', getViewport())
+  function emitResize () {
+    events.emit('resize')
+    loadImages(document)
+  }
 }

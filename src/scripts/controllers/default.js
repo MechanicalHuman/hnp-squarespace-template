@@ -4,13 +4,13 @@ const debug = require('debug')('hnp:controllers:default')
 
 module.exports = defaultController
 
-function defaultController (element) {
-  debug(arguments, 'load')
+function defaultController () {
+  debug('Initializing Controler')
+  const element = this
 
   const tweaks = []
 
   SQS.Tweak.watch(tweaks, onTweakChange)
-  sync()
 
   return {
     sync: sync,
@@ -19,11 +19,11 @@ function defaultController (element) {
 }
 
 function sync () {
-  debug(arguments, 'sync')
+  debug('sync')
 }
 
 function destroy () {
-  debug(arguments, 'destroy')
+  debug('destroy')
 }
 
 function onTweakChange (tweak) {

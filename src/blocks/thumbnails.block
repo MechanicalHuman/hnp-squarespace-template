@@ -1,0 +1,18 @@
+<div class="archive-grid" sqs-controller="Controllers.collection.archive" data-collection-id="{collection.id}">
+    {.repeated section items}
+    <article id="archive-{urlId}" class="archive-item" data-item-id="{id}" data-url-id="{urlId}">
+        <a class="archive-item-image-wrap" href="{fullUrl}" >
+            <figure class="archive-item-image content-fill" {.main-image?}{.if colorData} style="background-color: #{colorData.suggestedBgColor}" data-color="#{colorData.suggestedBgColor}"{.end}{.end}>
+                {.main-image?}
+                <img class="loading" {@|image-meta} />
+                {.end}
+            </figure>
+        </a>
+        <a class="archive-item-meta" href="{fullUrl}">
+            <h2 class="archive-item-title selectable">{title}</h2>
+            <h3 class="archive-item-description">{customContent.description}</h3>
+            <h3 class="archive-item-year">{addedOn|date %Y}{.equal? customContent.client ""}{.or},{customContent.client}{.end}</h3>
+        </a>
+    </article>
+    {.end}
+</div>

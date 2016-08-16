@@ -7,8 +7,10 @@ BABEL='-t [ babelify --presets [ es2015 ] ]'
 
 if [ "$NODE_ENV" = 'production' ]; then
     OPTIONS=''
+    echo "module.exports = 'production'" > $INPUT/env.js
 else
     OPTIONS='--debug'
+    echo "module.exports = 'development'" > $INPUT/env.js
 fi
 
 # clean the JS directory
@@ -19,6 +21,7 @@ mkdir -p $OUTPUT
 cp $INPUT/sqs-core/*.{js,map} $OUTPUT
 
 if [ "$1" = "--watch" ]; then
+    echo '> Watching src/scripts'
     watchify $INPUT/$ENTRY $OPTIONS --outfile $OUTPUT/bundle.js $BABEL
 else
     browserify $INPUT/$ENTRY $OPTIONS --outfile $OUTPUT/bundle.js $BABEL

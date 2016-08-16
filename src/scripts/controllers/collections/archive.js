@@ -7,96 +7,114 @@ const config = require('../../config')
 const utils = require('../../utils')
 const events = require('../../events')
 
-const thumbClass = '.archive-item-image'
 const wrapClass = '.archive-item'
+const thumbClass = '.archive-item-image'
 
 module.exports = archiveController
 
 function archiveController () {
+  debug('Initializing Controler')
+
   const element = this
-
-  const tweaks = []
-  const thumbnails = element.querySelectorAll(thumbClass) || []
+  const thumbnails = element.querySelectorAll(thumbClass)
   const wrappers = element.querySelectorAll(wrapClass)
-  SQS.Tweak.watch(tweaks, onTweakChange)
 
-  sync()
   events.on('resize', setThumbSize)
 
+  // Fire thumb calculations on load.
+  setThumbSize()
+
   return {
-    sync: sync,
+    sync: lodash.noop,
     destroy: destroy
   }
 
-  function sync () {
-    debug('sync')
-    setThumbSize()
-  }
-
   function destroy () {
+    debug('Removing "resize" listener')
     events.removeListener('resize', setThumbSize)
   }
 
-  function onTweakChange (tweak) {
-    debug(arguments, 'tweak change')
-  }
+  function setThumbSize (target) {
+    if (!target) target = config.thumbs.default
 
-  function setThumbSize (viewport = utils.getViewport()) {
-    debug(viewport)
+    const viewport = utils.getViewport()
 
-    /* TODO: get the computed navBar size*/
-
-    const upperTarget = 4
-    const lowerTarget = 2
-
-    const navBars = 80
-    const padding = 40
-
-    const container = element.getBoundingClientRect().width || viewport.width
-
-    const thumbSize = {
-      width: 178,
-      height: 230
-    }
-
-    const max = Math.min(Math.round(viewport.height * config.thumbRatio) - navBars, 480)
-
-    debug(padding, 'padding')
-    debug(max, 'max')
-    /* TODO: big screeen thumbs */
-
-    thumbSize.width = container / upperTarget
-    thumbSize.width = thumbSize.width - padding
-    thumbSize.width = Math.floor(thumbSize.width)
-    debug(thumbSize.width, 'width')
-
-    thumbSize.height = computeHeight()
-
-    // if (thumbSize.height >= max) {
-    //   debug(thumbSize.height, 'over max')
-
-    //   thumbSize.width = config.thumbRatio * max
-    //   thumbSize.width = thumbSize.width - padding
-    //   thumbSize.width = Math.floor(thumbSize.width)
-    //   debug(thumbSize.width, 'width')
-
-    //   thumbSize.height = computeHeight()
-    // }
-    /* Round the sizes */
+    let size = computeSize()
 
     /* Apply the new sizes */
-    lodash.each(thumbnails, elem => {
-      elem.style.width = `${thumbSize.width}px`
-      elem.style.height = `${thumbSize.height}px`
-    })
-    lodash.each(wrappers, elem => {
-      elem.style.width = `${thumbSize.width}px`
-    })
-    lodash.each(thumbnails, utils.loadImages)
 
-    function computeHeight () {
-      let height = (1 / config.thumbRatio) * thumbSize.width
-      return Math.floor(height)
+    // element.style.paddingTop = `${size.margin * 2}px`
+    element.style.paddingRight = `${size.margin}px`
+    element.style.paddingLeft = `${size.margin}px`
+
+    lodash.each(wrappers, elem => {
+      elem.style.width = `${size.width}px`
+      elem.style.paddingRight = `${size.margin}px`
+      elem.style.paddingLeft = `${size.margin}px`
+      elem.style.marginBottom = `${size.margin * 2}px`
+
+      const thumbnail = elem.querySelector(thumbClass)
+      thumbnail.style.width = `${size.width}px`
+      thumbnail.style.height = `${size.height}px`
+      thumbnail.style.borderRadius = `${size.radius}px`
+      thumbnail.style.marginBottom = `${Math.max(size.margin / 2, 10)}px`
+    })
+
+    utils.loadImages(element)
+
+    function computeSize () {
+      const minThumbs = Math.min(config.thumbs.max, thumbnails.length)
+      const maxThumbs = viewport.width <= 320 ? 1 : config.thumbs.min
+
+      const currentMargin = Math.round(config.thumbs.margin * target * 2)
+      const currentRow = Math.floor(viewport.width / (target + currentMargin))
+
+      let rows = 0
+      rows = currentRow
+      rows = Math.max(rows, maxThumbs)
+      rows = Math.min(rows, minThumbs)
+
+      const size = {}
+
+      size.width = getWidth(viewport.width, rows)
+      size.height = config.thumbs.ratio * size.width
+      size.margin = config.thumbs.margin * size.width
+      size.radius = config.thumbs.border * size.width
+
+      size.width = Math.floor(size.width)
+      size.height = Math.floor(size.height)
+      size.margin = Math.floor(size.margin)
+      size.radius = Math.floor(size.radius)
+
+      debug(`Thumb Width = ${size.width}px`)
+      debug(`Thumb Margin = ${size.margin}px`)
+
+      return size
+    }
+
+    function getWidth (space, number) {
+      const margins = ((number * 2) + 2) * config.thumbs.margin
+      debug(`Margins = ${margins} Thumb`)
+      let width = space / (number + margins)
+      return width
     }
   }
 }
+
+/*
+- mashimachine
+- dogparker
+- dj51
+- tire gauge
+- city corruption
+- glossy
+- Amalgam
+- well known extrangers
+- CCTV glasses
+- yasuni
+- alzheimer
+- Jail
+- Twettron
+- Parent Detector
+- Moment of silence
+ */

@@ -16,25 +16,28 @@
   "scripts": {
     "prebuild": "rm -rf template/*",
     "build": "npm-run-all --parallel build:*  --silent",
-    "build:assets": "scripts/assets.sh",
     "build:css": "scripts/styles.sh",
     "build:js": "scripts/javascript.sh",
     "build:template": "scripts/template.sh",
+    "predeploy": "NODE_ENV=production npm run build",
+    "deploy": "scripts/deploy.sh",
     "reload": "scripts/reload.sh",
     "serve": "scripts/serve.sh",
     "start": "npm-run-all todos build --parallel serve watch reload --silent",
     "test": "echo \"Error: no test specified\" && exit 1",
     "todos": "scripts/todos.sh",
+    "todos:watch": "scripts/todos.sh --watch",
     "watch": "npm-run-all --parallel watch:* --silent",
     "watch:css": "scripts/styles.sh --watch",
     "watch:js": "scripts/javascript.sh --watch",
-    "watch:template": "scripts/watch.sh"
+    "watch:template": "scripts/template.sh --watch"
   },
   "config": {
     "reload_port": "9000",
     "reload_ui_port": "9001",
     "server_port": "8080",
     "squarespace_auth": false,
+    "squarespace_git": "https://jorge-proao-rb8e.squarespace.com/template.git",
     "squarespace_url": "https://jorge-proao-rb8e.squarespace.com"
   },
   "dependencies": {
@@ -55,9 +58,5 @@
     "watchify": "^3.7.0"
   },
   "private": false,
-  "standard": {
-    "globals": [
-      "SQS"
-    ]
-  }
+  "standard": { "globals": [ "SQS" ] }
 }

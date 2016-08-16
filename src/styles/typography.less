@@ -120,24 +120,24 @@
 .serif-bold-italic {
   font-family: @serif;
   font-weight: 700;
-  font-style: normal;
+  font-style: italic;
 }
 
 .text {
+  .mobile({
+    line-height: 1.5;
+    letter-spacing: -0.004em;
+
+    font-size: 18px;
+  });
+
   line-height: 1.58;
-  letter-spacing: -.003em;
+  letter-spacing: -0.003em;
   white-space: pre-line;
 
   font-size: 21px;
 
-  font-feature-settings: "liga" 1;
-
-  // .include small-screen { 
-  //    line-height: 1.5; 
-  //    letter-spacing: -.004em; 
-  //    white-space: pre-line; 
-  //    font-size: 18px; 
-  //  }; 
+  font-feature-settings: 'liga' 1;
 }
 
 .hypens {

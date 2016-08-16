@@ -2,7 +2,7 @@
 
 module.exports = filter
 
-const pathRegexp = /\/assets|\/scripts|\/styles/i
+const pathRegexp = /\/scripts|\/styles|\/.git/i
 
 function filter (arg) {
   return !pathRegexp.test(arg)

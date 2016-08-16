@@ -2,9 +2,10 @@
 
 const EventEmitter = require('events')
 
-class Events extends EventEmitter {
+class HNPEvents extends EventEmitter {
+
 }
 
-Events.prototype.debug = require('debug')('hnp:events')
+HNPEvents.prototype.debug = require('debug')('hnp:events')
 
-module.exports = new Events()
+module.exports = new EventEmitter()

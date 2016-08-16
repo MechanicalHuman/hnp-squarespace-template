@@ -26,7 +26,7 @@ testResults = testResults.forEach(addToExports)
 /**
  *
  * Appends the given key to the documentElement class list based on the result
- *  of the test. If the test is negative it will add 'no-key'. Like Modernizer
+ *  of the test. If the test is negative it will add 'no-key'. (Emulates Modernizer behavior)
  *
  * @method    appendToRootClass
  * @param     {Function}           test    Must return a boolean

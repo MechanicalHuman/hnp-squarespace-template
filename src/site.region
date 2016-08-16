@@ -8,11 +8,11 @@
     <meta name="format-detection" content="telephone=no">
     {squarespace-headers}
   </head>
-  <body id="{squarespace.page-id}" class="{squarespace.page-classes}" data-ajax-loader="loading">
+  <body id="{squarespace.page-id}" class="{squarespace.page-classes}">
     <header id="header" class="main-navigation" role="banner">
        <squarespace:navigation navigationId="mainNav" template="navigation" />
     </header>
-    <main class="main-content loading" role="main" sqs-controller='Controllers.main'>
+    <main class="main-content" role="main" sqs-controller='Controllers.main'>
       {@|apply content.block}
     </main>
     <footer class="main-footer">

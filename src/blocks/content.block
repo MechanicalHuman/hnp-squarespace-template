@@ -1,8 +1,33 @@
-<!-- TODO: Collection type -->
 <!-- TODO: Hero Image -->
-<!-- TODO: Footer???-->
-<article id="page" data-content-field="main-content">
-      <!-- Squarespace mainContent -->
+<!-- Collection {@type} -->
+{.var @type collection.typeName}
+
+{.equal? @type "archive"}
+
+<nav id="{collection.typeName}" class="content-wrapper">
+    <!-- Squarespace mainContent -->
+    {squarespace.main-content}
+</nav>
+
+{.or}
+
+    {.equal? @type "page"}
+
+<article id="{collection.typeName}" class="content-wrapper" data-content-field="main-content">
+  <!-- Squarespace mainContent -->
+  <section class="page-container" >
       {squarespace.main-content}
+  </section>
 </article>
-<!-- FIXME: sqs-gallery-container ???  -->
+
+    {.or}
+
+<div id="{collection.typeName}" class="content-wrapper" data-content-field="main-content">
+    <!-- Squarespace mainContent -->
+    {squarespace.main-content}
+</div>
+
+    {.end}
+
+{.end}
+

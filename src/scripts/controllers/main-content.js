@@ -4,15 +4,18 @@ const debug = require('debug')('hnp:controllers:mainContent')
 const events = require('../events')
 const utils = require('../utils')
 const lodash = require('lodash')
+const config = require('../config')
 
 module.exports = mainContentController
 
 function mainContentController () {
-  debug('mounted')
+  debug('Initializing Controler')
   const element = this
 
-  events.on('ajax:start', fadeOut)
-  events.on('ajax:end', fadeIn)
+  if (config.ajax.use) {
+    events.on('ajax:start', fadeOut)
+    events.on('ajax:end', fadeIn)
+  }
 
   return {
     sync: lodash.noop,
@@ -20,22 +23,20 @@ function mainContentController () {
   }
 
   function destroy () {
-    debug('destroy')
-    events.removeListener('ajax:start', fadeOut)
-    events.removeListener('ajax:end', fadeIn)
+    if (config.ajax.use) {
+      debug('Removing all Listeners')
+      events.removeListener('ajax:start', fadeOut)
+      events.removeListener('ajax:end', fadeIn)
+    }
   }
 
   function fadeIn () {
-    debug('fadeIn')
+    debug('Revealing content')
     utils.removeClass(element, 'loading')
-  // setTimeout(function () {
-  //   element.style['max-height'] = 'unset'
-  //   utils.removeClass(element, 'loading')
-  // }, 0)
   }
+
   function fadeOut () {
-    debug('fadeOut')
-    // element.style['max-height'] = '100px'
+    debug('Fading content')
     utils.addClass(element, 'loading')
   }
 }

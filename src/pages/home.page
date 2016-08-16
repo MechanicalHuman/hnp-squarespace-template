@@ -1,0 +1,6 @@
+<squarespace:query collection="archive" featured="true">
+    <div class="archive-wrapper">
+        <h1 class="archive-title">Selected Works</h1>
+        {@|apply thumbnails.block}
+    </div>
+</squarespace:query>

@@ -1,16 +1,40 @@
 'use strict'
 
 /* eslint-env browser */
+/* TODO: Revamp this whole module */
+
+const lodash = require('lodash')
+const debug = require('debug')('hnp:ajax')
+
+const config = require('./config')
+const events = require('./events')
 
 var httpRequest
 var ajaxFired = false
 var currentEvent
 var currentTarget
 
-const prototypeAnim = require('./prototype-anim')
-const events = require('../events')
+module.exports = AjaxLoader
 
-module.exports = {
+/**
+ *  Constructor
+ *
+ *  @constructor
+ */
+function AjaxLoader () {
+  this.CONTENT = '[role="main"]'
+  this.ANCHORS = config.ajax.anchors
+  this.SITE_CONTAINER = config.mainContainer
+  this.TIMEOUT = config.ajax.timeout
+  this.SQS_CONTROLLER = false
+  this.RUN_ON_LOGIN = false
+  this.ACTIVE_NAV_CLASS = config.ajax.activeNavClass
+  this.beforeRequestAnim = lodash.noop
+  this.afterRequestAnim = lodash.noop
+  this.initialize()
+}
+
+AjaxLoader.prototype = {
   initialize: initialize,
   bind: bind,
   bindAjaxAttr: bindAjaxAttr,
@@ -35,15 +59,7 @@ module.exports = {
   bindPopState: bindPopState,
   scrollToPosition: scrollToPosition,
   toggleLoadingAttr: toggleLoadingAttr,
-  toggleWillChange: toggleWillChange,
-  isPageTransitionEnabled: isPageTransitionEnabled,
-  animations: {
-    fadeIn: prototypeAnim.fadeIn.bind(this),
-    fadeOut: prototypeAnim.fadeOut.bind(this),
-    fade: prototypeAnim.fade.bind(this),
-    slideUp: prototypeAnim.slideUp.bind(this),
-    slideIntoView: prototypeAnim.slideIntoView.bind(this)
-  }
+  isPageTransitionEnabled: isPageTransitionEnabled
 }
 
 function initialize () {
@@ -169,48 +185,10 @@ function hasSomeParentTheClass (element, classname) {
 function fireRequest (url) {
   ajaxFired = true
   events.emit('ajax:start')
-  // this.destroySqsBlocks()
   this.toggleLoadingAttr('add')
   this.modifyLinkState(url)
   this.destroySqsBlocks()
   this.ajax(url)
-  // this.toggleWillChange(document.querySelector(this.SITE_CONTAINER), ['transform', 'opacity'])
-
-// if (currentEvent.type === 'click') {
-//   if (this.isPageTransitionEnabled() && this.hasSomeParentTheClass(currentTarget, this.pageTransition.animLink)) {
-//     // Index link click, with Page Transition Animation Enabled
-//     if (this.beforeRequestAnim) {
-//       this.beforeRequestAnim()
-//     }
-//     // No before request animation
-//     this.animations.fadeOut(this.SITE_CONTAINER, this.pageTransition.fadeOutDuration, function () {
-//       this.modifyLinkState(url)
-//       this.destroySqsBlocks()
-//       this.ajax(url)
-//     }.bind(this))
-//   } else if (this.hasSomeParentTheClass(currentTarget, this.pageTransition.animLink)) {
-//     // Index Link click with Page Transition disabled
-//     this.animations.fadeOut(this.SITE_CONTAINER, this.pageTransition.fadeOutDuration, function () {
-//       this.modifyLinkState(url)
-//       this.destroySqsBlocks()
-//       this.ajax(url)
-//     }.bind(this))
-//   } else {
-//     // Normal page link click
-//     this.animations.fadeOut(this.SITE_CONTAINER, 0.12, function () {
-//       this.modifyLinkState(url)
-//       this.destroySqsBlocks()
-//       this.ajax(url)
-//     }.bind(this))
-//   }
-// } else {
-//   // Back button click
-//   this.animations.fadeOut(this.SITE_CONTAINER, 0.12, function () {
-//     this.modifyLinkState(url)
-//     this.destroySqsBlocks()
-//     this.ajax(url)
-//   }.bind(this))
-// }
 }
 
 function ajax (url) {
@@ -234,7 +212,6 @@ function handleRequest (url) {
           this.replaceHistory()
           this.updateHistory(url, document.querySelector('title').textContent)
         }
-
         this.updatePage(pageData)
       }
     } else {
@@ -245,6 +222,7 @@ function handleRequest (url) {
 
 function handleTimeout (url) {
   ajaxFired = false
+  debug(`Timed out, Redirecting to ${url}`)
   events.emit('ajax:end')
   window.location.href = url
 }
@@ -254,16 +232,14 @@ function createDummyDom (data) {
   html.innerHTML = data
 
   var bodyClasses = html.querySelector('body').classList
-
-  // var dummyHead = html.querySelector('head')
-
   var docTitle = html.querySelector('title').textContent
   var head = html.querySelector('head')
-
   var headMeta = this.findMetaTags(head)
+
   this.bindMetaTags(headMeta)
 
   var docFrag = document.createDocumentFragment()
+
   Array.prototype.forEach.call(headMeta, function (node) {
     docFrag.appendChild(node)
   })
@@ -281,10 +257,7 @@ function createDummyDom (data) {
     container: html.querySelector(this.SITE_CONTAINER) ? html.querySelector(this.SITE_CONTAINER).innerHTML : null
   }
 
-  // html.removeChild(html.querySelector('body'))
-  // html.remove()
   html = null
-  // dummyHead = null
 
   return dataObj
 }
@@ -313,15 +286,6 @@ function updatePage (data) {
 
   this.toggleLoadingAttr('remove')
 
-  // if (currentEvent.type === 'click' && (this.hasSomeParentTheClass(currentTarget, this.pageTransition.animLink))) {
-  //   if (this.afterRequestAnim) {
-  //     this.afterRequestAnim()
-  //     this.animations.fadeIn(this.SITE_CONTAINER, this.pageTransition.fadeInDuration)
-  //   }
-  // } else {
-  //   this.animations.fadeIn(this.SITE_CONTAINER, this.pageTransition.fadeInDuration)
-  // }
-
   // Determine scroll position - if coming from a link click, go to top, else, scroll to history position
   if (currentEvent.type === 'click') {
     this.scrollToPosition(0, 0)
@@ -330,8 +294,6 @@ function updatePage (data) {
     // this.scrollToPosition(window.history.state.position.x, window.history.state.position.y)
     this.scrollToPosition(0, 0)
   }
-
-  // this.toggleWillChange(document.querySelector(this.SITE_CONTAINER), ['auto'])
   ajaxFired = false
   events.emit('ajax:end')
 }
@@ -345,8 +307,8 @@ function destroySqsBlocks () {
   httpRequest = null
 }
 
+/** Refires the SQS controllers */
 function refireTemplateControllers () {
-  // if sqs-controller exists, refire it.
   if (window.SQSControllerSync) {
     window.SQSControllerSync()
   }
@@ -399,13 +361,6 @@ function toggleLoadingAttr (method) {
   } else if (method === 'remove') {
     document.body.setAttribute('data-ajax-loader', 'loaded')
   }
-}
-
-function toggleWillChange (el, valueArr) {
-  var value = valueArr.map(function (val, index, arr) {
-    return index < arr.length - 1 ? val + ', ' : val
-  }).toString()
-  el.style.willChange = value
 }
 
 function isPageTransitionEnabled () {

@@ -1,21 +1,30 @@
-<nav class="navigation" role="navigation" data-content-field="navigation-mainNav">
-  <a class="icon brand spin" id="branding" href="/" title="Home" sqs-controller="Controllers.brand">
+<nav class="navigation" role="navigation">
+  <a class="icon brand" id="branding" href="/" title="Home" sqs-controller="Controllers.brand">
     <svg viewBox="0 0 512 512">
       <use xlink:href="/assets/brand.svg#brand"></use>
     </svg>
   </a>
   <ul class="nav-wrap">
     {.repeated section items}
+
     <li class="nav-element">
+
       {.section collection}
       <a class="nav-item transition-link{.if active} active{.end}" id="id-{id}" href="{fullUrl}" title="{title}">{navigationTitle}</a>
       <div class="nav-under"></div>
       {.end}
+
       {.section externalLink}
       <a class="nav-item transition-link" href="{url}"{.section newWindow} target="_blank"{.end} title="{title}">{title}</a>
       <div class="nav-under"></div>
       {.end}
+
     </li>
+
+    {.alternates with}
+      <!-- TODO: Separator -->
+      <!-- <div class="nav-separator">/</div> -->
+
     {.end}
   </ul>
 </nav>

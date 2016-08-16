@@ -2,46 +2,72 @@
 @thumb-height: 230px;
 @thumb-margin: 20px;
 
+
+
 .archive-wrapper {
-  background-color: @archiveColor;
-
-  width: 100vw;
-
-
-  /*TODO: list styles*/
-  &.archive-grid {
-    .flex-row;
-    .min-vertical;
-    // justify-content: flex-start;
-
-    flex-wrap: wrap;
-    align-items: flex-start;
-    align-content: flex-start;
-    justify-content: space-around;
-  }
-}
-
-
-
-.archive-item {
-  // flex-grow: 2;
   box-sizing: border-box;
 
-  margin: @thumb-margin;
-  // padding-bottom: @thumb-margin;
+  background-color: @archiveColor;
+
+  width: 100%;
+}
+
+.archive-title {
+  .sans-condensed-ligth-italic;
+  .selectable;
+
+  box-sizing: border-box;
+
+  background-color: @archiveColor;
+
+  padding: @navigation-margin;
+
+  width: 100%;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  letter-spacing: -0.01rem;
+  color: lighten(@textColor, 45%);
+
+  font-size: 24px;
+  //   color: @bgColor;
+}
+
+.archive-grid {
+  .flex-row;
+  .min-vertical;
+
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  // justify-content: space-around;
+  justify-content: flex-start;
+  // padding-top: @thumb-margin * 2;
+
+  padding-right: @thumb-margin;
+  padding-left: @thumb-margin;
+
+  width: 100%;
+}
+
+.archive-item {
+  .no-flex;
+
+  margin-bottom: @thumb-margin * 2;
+  // box-sizing: border-box;
+
+  padding-right: @thumb-margin;
+  padding-left: @thumb-margin;
 
   width: @thumb-width;
-
-  // &::last-child {
-  //   align-self: flex-start;
-  // }
 
   .archive-item-image {
     .click();
 
     box-sizing: border-box;
 
-    margin-bottom: 10px;
+    margin-bottom: @thumb-margin / 2;
 
     border-radius: @border-radius;
 
@@ -50,6 +76,8 @@
     width: @thumb-width;
 
     height: @thumb-height;
+
+    overflow: hidden !important;
   }
 
   .archive-item-meta {
@@ -58,23 +86,41 @@
 
     width: 100%;
 
-    .archive-item-title {
-      .sans-bold;
+    text-align: left;
 
-      font-size: 14px;
+    .archive-item-title {
+      .sans-condensed;
+
+      width: 95%;
+
+      line-height: 1.5;
+      color: @textColor;
+
+      font-size: 18px;
     }
     .archive-item-description {
       .sans-italic;
 
-      margin-top: 3px;
+      width: 95%;
 
-      width: 80%;
-
-      text-align: center;
-
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+      white-space: pre-line;
       color: lighten(@textColor, 25%);
 
       font-size: 12px;
+    }
+    .archive-item-year {
+      .sans-regular;
+
+      width: 95%;
+
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+      white-space: pre-line;
+      color: lighten(@textColor, 35%);
+
+      font-size: 10px;
     }
   }
 }
