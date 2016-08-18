@@ -5,7 +5,7 @@ const debug = require('debug')('hnp:controllers:default')
 module.exports = defaultController
 
 function defaultController () {
-  debug('Initializing Controler')
+  debug('Initializing Controller')
   const element = this
 
   const tweaks = []

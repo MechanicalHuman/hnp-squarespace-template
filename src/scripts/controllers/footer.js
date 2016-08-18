@@ -5,7 +5,7 @@ const lodash = require('lodash')
 module.exports = defaultController
 
 function defaultController () {
-  debug('Initializing Controler')
+  debug('Initializing Controller')
   const element = this
   const anchors = element.querySelectorAll('a')
   lodash(anchors)

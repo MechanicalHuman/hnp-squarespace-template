@@ -1,31 +1,27 @@
 'use strict'
 
 const debug = require('debug')('hnp:controllers:heroImage')
+const lodash = require('lodash')
 
-module.exports = defaultController
+const events = require('../events')
+const utils = require('../utils')
 
-function defaultController () {
-  debug('Initializing Controler')
+module.exports = heroImageController
+
+function heroImageController () {
+  debug('Initializing Controller')
   const element = this
-
-  const tweaks = []
-
-  SQS.Tweak.watch(tweaks, onTweakChange)
-
+  const color = JSON.parse(element.getAttribute('data-color'))
+  utils.loadImages(element)
+  debug('Emitting image color values')
+  events.emit('color:main', color)
   return {
-    sync: sync,
+    sync: lodash.noop,
     destroy: destroy
   }
 }
 
-function sync () {
-  debug('sync')
-}
-
 function destroy () {
-  debug('destroy')
-}
-
-function onTweakChange (tweak) {
-  debug(arguments, 'tweak change')
+  debug('Restoring color values')
+  events.emit('color:restore')
 }

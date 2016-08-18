@@ -1,18 +1,22 @@
-@navigation-margin: 15px;
+.nav-spacer {
+  width: 100vw;
 
+  height: @bars-heigth;
+}
 
 .main-navigation {
   .sans-condensed-ligth;
   .flex-column;
+
+  position: absolute;
   // .mobile({
   //   font-size: 22px;
   // });
-
   box-sizing: border-box;
 
-  transition: background-color @transition linear, color @transition linear;
+  z-index: 1000;
 
-  background-color: @bgColor;
+  background-color: transparent;
 
   width: 100vw;
 
@@ -25,6 +29,13 @@
     box-sizing: border-box;
 
     justify-content: space-between;
+
+    transition-property: background-color, color;
+    transition-duration: @transition-long, @transition;
+    transition-timing-function: ease-out, ease-in-out;
+    transition-delay: @transition, @transition-long;
+
+    z-index: 1001;
 
     padding-right: @navigation-margin;
     padding-left: @navigation-margin;
@@ -41,7 +52,9 @@
     transition-property: transform, fill;
     transition-duration: @transition;
     transition-timing-function: linear;
-    transition-delay: @transition-short;
+
+    z-index: 1002;
+    // transition-delay: @transition-short;
 
     cursor: pointer !important;
 
@@ -82,6 +95,8 @@
     flex-grow: 1;
     justify-content: flex-end;
 
+    z-index: 1003;
+
     width: 100vw;
 
     min-height: @bars-heigth;
@@ -112,6 +127,7 @@
     box-sizing: border-box;
 
     opacity: 0.6;
+    z-index: 1004;
 
     margin-right: @navigation-margin;
 
@@ -133,7 +149,7 @@
     }
 
     .nav-under {
-      transition: width @transition-short ease-out;
+      transition: width @transition-short ease-out, background-color @transition-short ease-out;
 
       background-color: @textColor;
 

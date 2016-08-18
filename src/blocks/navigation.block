@@ -1,4 +1,4 @@
-<nav class="navigation" role="navigation">
+<nav class="navigation" role="navigation" sqs-controller="Controllers.navigation.global">
   <a class="icon brand" id="branding" href="/" title="Home" sqs-controller="Controllers.brand">
     <svg viewBox="0 0 512 512">
       <use xlink:href="/assets/brand.svg#brand"></use>

@@ -9,7 +9,7 @@ const config = require('../config')
 module.exports = mainContentController
 
 function mainContentController () {
-  debug('Initializing Controler')
+  debug('Initializing Controller')
   const element = this
 
   if (config.ajax.use) {

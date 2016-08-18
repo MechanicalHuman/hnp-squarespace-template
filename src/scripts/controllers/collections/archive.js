@@ -7,17 +7,13 @@ const config = require('../../config')
 const utils = require('../../utils')
 const events = require('../../events')
 
-const wrapClass = '.archive-item'
-const thumbClass = '.archive-item-image'
-
 module.exports = archiveController
 
 function archiveController () {
-  debug('Initializing Controler')
+  debug('Initializing Controller')
 
   const element = this
-  const thumbnails = element.querySelectorAll(thumbClass)
-  const wrappers = element.querySelectorAll(wrapClass)
+  const wrappers = element.querySelectorAll(config.thumbs.class)
 
   events.on('resize', setThumbSize)
 
@@ -53,7 +49,7 @@ function archiveController () {
       elem.style.paddingLeft = `${size.margin}px`
       elem.style.marginBottom = `${size.margin * 2}px`
 
-      const thumbnail = elem.querySelector(thumbClass)
+      const thumbnail = elem.querySelector(config.thumbs.image)
       thumbnail.style.width = `${size.width}px`
       thumbnail.style.height = `${size.height}px`
       thumbnail.style.borderRadius = `${size.radius}px`
@@ -63,7 +59,7 @@ function archiveController () {
     utils.loadImages(element)
 
     function computeSize () {
-      const minThumbs = Math.min(config.thumbs.max, thumbnails.length)
+      const minThumbs = Math.min(config.thumbs.max, wrappers.length)
       const maxThumbs = viewport.width <= 320 ? 1 : config.thumbs.min
 
       const currentMargin = Math.round(config.thumbs.margin * target * 2)

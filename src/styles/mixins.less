@@ -69,13 +69,19 @@
   }
 }
 
-/* Mobile Safari */
-.mobilesafari(@rules) {
-  html.mobilesafari & {
+/* Mobile Safari - iphone */
+.iphone(@rules) {
+  html.iphone & {
     @rules();
   }
 }
 
+/* Mobile Safari - iapd */
+.ipad(@rules) {
+  html.ipad & {
+    @rules();
+  }
+}
 
 .mobile(@rules) {
   @media only screen and (max-width: 768px) {
@@ -90,11 +96,14 @@
 /* min heigth */
 
 .min-vertical {
-  .mobilesafari({
+  .iphone({
+    min-height: calc(~'~"100vh - (@{bars-heigth} + @{footer-heigth})"');
+  });
+  .ipad({
     min-height: calc(~'~"100vh - @{bars-heigth}"');
   });
 
-  min-height: calc(~'~"100vh - (@{bars-heigth} * 2)"');
+  min-height: calc(~'~"100vh - @{footer-heigth}"');
 }
 
 .hypens {

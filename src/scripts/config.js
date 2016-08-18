@@ -41,6 +41,12 @@ config.mainContainer = '.main-content'
 config.brandElement = '#branding'
 config.debounceTick = 100
 
+config.nav = {
+  alpha: 0.66,
+  background: '#d6d6db',
+  foreground: '#333333'
+}
+
 config.ajax = {
   use: useAjax(),
   anchors: `a[href]:${anchors.join(':')}`,
@@ -49,8 +55,11 @@ config.ajax = {
 }
 
 config.thumbs = {
+  class: '.archive-item',
+  image: '.archive-item-image',
   ratio: 1.29213483,
   default: 178,
+  minWidth: 150,
   margin: 0.11235955,
   border: 0.03370787,
   max: 5,

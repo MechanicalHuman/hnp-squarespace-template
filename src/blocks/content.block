@@ -1,5 +1,4 @@
-<!-- TODO: Hero Image -->
-<!-- Collection {@type} -->
+<!-- Collection collection.typeName -->
 {.var @type collection.typeName}
 
 {.equal? @type "archive"}
@@ -9,25 +8,23 @@
     {squarespace.main-content}
 </nav>
 
-{.or}
+{.or}{.equal? @type "page"}
 
-    {.equal? @type "page"}
-
+<div class="nav-spacer"></div>
 <article id="{collection.typeName}" class="content-wrapper" data-content-field="main-content">
-  <!-- Squarespace mainContent -->
   <section class="page-container" >
+      <!-- Squarespace mainContent -->
       {squarespace.main-content}
   </section>
 </article>
 
-    {.or}
+{.or}
 
+<div class="nav-spacer"></div>
 <div id="{collection.typeName}" class="content-wrapper" data-content-field="main-content">
     <!-- Squarespace mainContent -->
     {squarespace.main-content}
 </div>
 
-    {.end}
-
-{.end}
+{.end}{.end}
 

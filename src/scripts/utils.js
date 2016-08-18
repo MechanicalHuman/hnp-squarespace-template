@@ -14,7 +14,8 @@ module.exports = {
   setOrientation: setOrientation,
   onAnimationEnd: onAnimationEnd,
   onAnimationIteration: onAnimationIteration,
-  onResize: _throttledResize()
+  onResize: _throttledResize(),
+  makeCSSGradient: makeCSSGradient
 }
 
 /**
@@ -91,10 +92,18 @@ function getViewport () {
  */
 
 function setOrientation () {
-  let orientation = 'landscape'
-  if (window.orientation !== 90 && window.orientation !== -90) {
-    orientation = 'portrait'
+  let orientation
+  if (!window.orientation) {
+    const viewport = getViewport()
+    orientation = viewport.width < viewport.height ? 'portrait' : 'landscape'
+  } else {
+    if (window.orientation !== 90 && window.orientation !== -90) {
+      orientation = 'portrait'
+    } else {
+      orientation = 'landscape'
+    }
   }
+
   removeClass(document.documentElement, 'landscape')
   removeClass(document.documentElement, 'portrait')
   addClass(document.documentElement, orientation)
@@ -185,6 +194,36 @@ function onAnimationIteration (element, callback) {
     element.addEventListener('webkitAnimationIteration', runOnce)
     element.addEventListener('animationiteration', runOnce)
   }
+}
+
+/**
+ * Returns a broser aware CSS gradient String
+ *
+ * @method    makeCSSGradient
+ * @param     {String}           start
+ * @param     {String}           end
+ * @param     {String}           direction
+ * @return    {String}
+ */
+
+function makeCSSGradient (start, end, direction) {
+  /* First detect the prefix */
+  let prefix = ''
+  let test = document.createElement('div')
+  const prefixes = ['-o-', '-ms-', '-moz-', '-webkit-']
+
+  prefixes.forEach(function (p) {
+    test.style.background = `${p}linear-gradient(#000000, #ffffff)`
+    if (test.style.background) prefix = p
+  })
+  test = null // Clean up after itself.
+
+  /* apply defaults*/
+  if (!start) start = '#000000'
+  if (!end) end = start
+  if (!direction) direction = 'left'
+
+  return `${prefix}linear-gradient(${direction},${start},${end})`
 }
 
 /**

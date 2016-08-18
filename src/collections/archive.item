@@ -1,7 +1,36 @@
 {.section item}
+<!-- TODO: Add SQS content editable -->
+<figure class="hero-img content-fill" data-color='{colorData|json}' style="background-color: #{colorData.suggestedBgColor}" sqs-controller="Controllers.heroImage">
+     <img class="loading" {@|image-meta} />
+</figure>
 <article class="page-container">
     <section>
+        <h1 data-content-field="title">{title}</h1>
+    </section>
+    <section data-item-id="{id}">
     {body}
     </section>
 </article>
+<nav class="archive-wrapper darken" sqs-controller="Controllers.navigation.archive" data-current-id="{id}">
+    <squarespace:query collection="{collection.urlId}" featured="true">
+            <h1 class="archive-title">Similar? Selected?</h1>
+            <div class="archive-scroll" data-collection-id="{collection.id}">
+                {.repeated section items}
+                <article id="archive-{urlId}" class="archive-item" data-item-id="{id}" data-url-id="{urlId}">
+                    <a class="archive-item-image-wrap" href="{fullUrl}" >
+                        <figure class="archive-item-image content-fill" style="background-color: #{colorData.suggestedBgColor}">
+                            <img class="loading" {@|image-meta} />
+                        </figure>
+                    </a>
+                    <a class="archive-item-meta" href="{fullUrl}">
+                        <h2 class="archive-item-title selectable">{title}</h2>
+                       <!--  <h3 class="archive-item-description">{customContent.description}</h3> -->
+                        <!-- <h3 class="archive-item-year">{.equal? customContent.year ""}{addedOn|date %Y}{.or}{customContent.year}{.end}{.equal? customContent.client ""}{.or}, {customContent.client}{.end}</h3> -->
+                    </a>
+                </article>
+                {.end}
+            </div>
+    </squarespace:query>
+</nav>
+
 {.end}

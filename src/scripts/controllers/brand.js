@@ -10,7 +10,7 @@ const config = require('../config')
 module.exports = brandController
 
 function brandController () {
-  debug('Initializing Controler')
+  debug('Initializing Controller')
   const element = this
 
   if (config.ajax.use) {

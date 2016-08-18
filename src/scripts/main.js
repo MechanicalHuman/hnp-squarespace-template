@@ -5,6 +5,7 @@ const DEBUG = require('debug')
 const config = require('./config')
 const utils = require('./utils')
 const events = require('./events')
+const capabilities = require('./capabilities')
 const AjaxLoader = require('./ajaxLoader')
 
 const debug = require('debug')('hnp:main')
@@ -23,7 +24,7 @@ window.Controllers = {
   collection: {
     archive: require('./controllers/collections/archive')
   },
-  banner: require('./controllers/hero-image'),
+  heroImage: require('./controllers/hero-image'),
   brand: require('./controllers/brand'),
   main: require('./controllers/main-content'),
   footer: require('./controllers/footer'),
@@ -59,8 +60,8 @@ function run () {
   // Initialize the Ajax Loader.
   if (config.ajax.use) {
     debug('Using AJAX')
+    let t = new AjaxLoader() // eslint-disable-line
     events.emit('ajax:end')
-    let a = new AjaxLoader() // eslint-disable-line
   } else {
     debug('No AJAX')
   }
@@ -73,11 +74,14 @@ function run () {
   // Subscribe @emitResize to the window's 'resize' event.
   window.addEventListener('resize', utils.onResize)
 
-  // Subscribe @setOrientation to the window's 'orientationchange' event.
-  window.addEventListener('orientationchange', utils.setOrientation)
+  // Subscribe @setOrientation to the window's 'resize' event.
+  window.addEventListener('resize', utils.setOrientation)
 
   // Subscribe @emitResize to the window's 'orientationchange' event.
   window.addEventListener('orientationchange', utils.onResize)
+
+  // Subscribe @setOrientation to the window's 'orientationchange' event.
+  window.addEventListener('orientationchange', utils.setOrientation)
 
   // Subscribe @loadImages to the window's 'orientationchange' event.
   window.addEventListener('orientationchange', () => utils.loadImages(document))

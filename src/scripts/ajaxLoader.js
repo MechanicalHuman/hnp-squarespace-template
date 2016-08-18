@@ -3,7 +3,6 @@
 /* eslint-env browser */
 /* TODO: Revamp this whole module */
 
-const lodash = require('lodash')
 const debug = require('debug')('hnp:ajax')
 
 const config = require('./config')
@@ -26,11 +25,7 @@ function AjaxLoader () {
   this.ANCHORS = config.ajax.anchors
   this.SITE_CONTAINER = config.mainContainer
   this.TIMEOUT = config.ajax.timeout
-  this.SQS_CONTROLLER = false
-  this.RUN_ON_LOGIN = false
   this.ACTIVE_NAV_CLASS = config.ajax.activeNavClass
-  this.beforeRequestAnim = lodash.noop
-  this.afterRequestAnim = lodash.noop
   this.initialize()
 }
 
@@ -58,7 +53,7 @@ AjaxLoader.prototype = {
   replaceHistory: replaceHistory,
   bindPopState: bindPopState,
   scrollToPosition: scrollToPosition,
-  toggleLoadingAttr: toggleLoadingAttr,
+
   isPageTransitionEnabled: isPageTransitionEnabled
 }
 
@@ -185,7 +180,7 @@ function hasSomeParentTheClass (element, classname) {
 function fireRequest (url) {
   ajaxFired = true
   events.emit('ajax:start')
-  this.toggleLoadingAttr('add')
+  this.scrollToPosition(0, 0)
   this.modifyLinkState(url)
   this.destroySqsBlocks()
   this.ajax(url)
@@ -279,21 +274,10 @@ function updatePage (data) {
   document.querySelector(this.SITE_CONTAINER).innerHTML = data.container
 
   this.initializeSqsBlocks()
-
-  if (this.SQS_CONTROLLER) {
-    this.refireTemplateControllers()
-  }
-
-  this.toggleLoadingAttr('remove')
+  this.refireTemplateControllers()
 
   // Determine scroll position - if coming from a link click, go to top, else, scroll to history position
-  if (currentEvent.type === 'click') {
-    this.scrollToPosition(0, 0)
-    this.replaceHistory()
-  } else {
-    // this.scrollToPosition(window.history.state.position.x, window.history.state.position.y)
-    this.scrollToPosition(0, 0)
-  }
+  if (currentEvent.type === 'click') this.replaceHistory()
   ajaxFired = false
   events.emit('ajax:end')
 }
@@ -353,14 +337,6 @@ function bindPopState (e) {
 
 function scrollToPosition (x, y) {
   window.scrollTo(x, y)
-}
-
-function toggleLoadingAttr (method) {
-  if (method === 'add') {
-    document.body.setAttribute('data-ajax-loader', 'loading')
-  } else if (method === 'remove') {
-    document.body.setAttribute('data-ajax-loader', 'loaded')
-  }
 }
 
 function isPageTransitionEnabled () {

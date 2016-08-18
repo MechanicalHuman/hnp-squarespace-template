@@ -7,7 +7,9 @@ const utils = require('./utils')
 
 const additionalTests = {
   notifications: hasNotifications,
-  mobilesafari: isMobileSafari
+  mobilesafari: isMobileSafari,
+  iphone: isIphone,
+  ipad: isIpad
 }
 
 const skipRegEx = /(^wf)|(^yui)|(^js)|(^portrait)|(^landscape)/gi
@@ -65,4 +67,12 @@ function hasNotifications () {
 
 function isMobileSafari () {
   return Boolean((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i)))
+}
+
+function isIphone () {
+  return Boolean((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)))
+}
+
+function isIpad () {
+  return Boolean(navigator.userAgent.match(/iPad/i))
 }

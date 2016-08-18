@@ -13,6 +13,6 @@ module.exports = {
   reloadDebounce: 200,
   plugins: ['browser-sync-logger'],
   injectChanges: false,
-  codeSync: false,
+  codeSync: true,
   timestamps: true
 }

@@ -7,9 +7,10 @@
 .archive-wrapper {
   box-sizing: border-box;
 
-  background-color: @archiveColor;
-
   width: 100%;
+  &.darken {
+    background-color: darken(@bgColor, 20%);
+  };
 }
 
 .archive-title {
@@ -18,9 +19,9 @@
 
   box-sizing: border-box;
 
-  background-color: @archiveColor;
-
   padding: @navigation-margin;
+  padding-top: @navigation-margin *2;
+  padding-bottom: @navigation-margin *2;
 
   width: 100%;
 
@@ -31,12 +32,13 @@
   color: lighten(@textColor, 45%);
 
   font-size: 24px;
-  //   color: @bgColor;
+  .archive-wrapper.darken & {
+    color: lighten(@textColor, 65%);
+  }
 }
 
 .archive-grid {
   .flex-row;
-  .min-vertical;
 
   flex-wrap: wrap;
   align-items: flex-start;
@@ -49,6 +51,31 @@
   padding-left: @thumb-margin;
 
   width: 100%;
+}
+
+.archive-scroll {
+  display: flex;
+
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  margin-right: auto;
+  margin-left: auto;
+
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  white-space: nowrap;
+
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  // .archive-item {
+  //   display: inline-block;
+  // }
 }
 
 .archive-item {
@@ -65,6 +92,7 @@
   .archive-item-image {
     .click();
 
+    display: block;
     box-sizing: border-box;
 
     margin-bottom: @thumb-margin / 2;
@@ -109,6 +137,9 @@
       color: lighten(@textColor, 25%);
 
       font-size: 12px;
+      .archive-wrapper.darken & {
+        color: @textColor;
+      }
     }
     .archive-item-year {
       .sans-regular;
@@ -121,6 +152,9 @@
       color: lighten(@textColor, 35%);
 
       font-size: 10px;
+      .archive-wrapper.darken & {
+        color: @textColor;
+      }
     }
   }
 }
