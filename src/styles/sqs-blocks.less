@@ -2,18 +2,52 @@
   /* ALL BLOCKS */
   .sqs-block-content {
     .serif-regular;
+
     /* All Contents*/
   }
 }
 .sqs-block-html,
 .sqs-block-markdown {
   .sqs-block-content {
+    .serif-regular;
+    h1,
+    h2,
+    h3,
+    h4,
+    ul,
     p {
-      .serif-regular;
+      .selectable;
+
+      margin-bottom: 20px;
+    }
+    p {
       .text;
       .hypens;
 
-      margin-bottom: 20px;
+
+      a {
+        .click();
+        .selectable;
+
+        text-decoration: underline;
+      }
+    }
+    ul {
+      .base-text(19px);
+
+      list-style-position: inside;
+      list-style-type: square;
+      li {
+        .selectable;
+
+        // margin-bottom: 10px;
+        a {
+          .click();
+          .selectable;
+
+          // text-decoration: underline;
+        }
+      }
     }
   }
 }

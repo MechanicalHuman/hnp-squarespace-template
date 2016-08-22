@@ -124,20 +124,25 @@
 }
 
 .text {
+  .base-text(21px);
+
+  white-space: pre-line;
+
+  font-feature-settings: 'liga' 1;
+}
+
+.base-text(@size) {
   .mobile({
     line-height: 1.5;
     letter-spacing: -0.004em;
 
-    font-size: 18px;
+    font-size: @size * 0.85714286;
   });
 
   line-height: 1.58;
   letter-spacing: -0.003em;
-  white-space: pre-line;
 
-  font-size: 21px;
-
-  font-feature-settings: 'liga' 1;
+  font-size: @size;
 }
 
 .hypens {

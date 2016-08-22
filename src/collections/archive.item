@@ -4,17 +4,20 @@
      <img class="loading" {@|image-meta} />
 </figure>
 <article class="page-container">
-    <section>
-        <h1 data-content-field="title">{title}</h1>
+    <section class="metadata">
+        <h1 class="title">{title}</h1>
+        <h3 class="description">{customContent.description}</h2>
+        <h4 class="year">{.equal? customContent.year ""}{addedOn|date %Y}{.or}{customContent.year}{.end}{.equal? customContent.client ""}{.or}, {customContent.client}{.end}</h3>
+        <h5 class="role">{.equal? customContent.role ""}{# dev/null}{.or}{customContent.role}{.end}</h3>
     </section>
-    <section data-item-id="{id}">
+    <section data-item-id="{item.id}">
     {body}
     </section>
 </article>
 <nav class="archive-wrapper darken" sqs-controller="Controllers.navigation.archive" data-current-id="{id}">
     <squarespace:query collection="{collection.urlId}" featured="true">
             <h1 class="archive-title">Similar? Selected?</h1>
-            <div class="archive-scroll" data-collection-id="{collection.id}">
+            <div class="archive-scroll">
                 {.repeated section items}
                 <article id="archive-{urlId}" class="archive-item" data-item-id="{id}" data-url-id="{urlId}">
                     <a class="archive-item-image-wrap" href="{fullUrl}" >

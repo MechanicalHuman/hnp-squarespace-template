@@ -82,15 +82,15 @@ function archiveController () {
       size.margin = Math.floor(size.margin)
       size.radius = Math.floor(size.radius)
 
-      debug(`Thumb Width = ${size.width}px`)
-      debug(`Thumb Margin = ${size.margin}px`)
-
+      // debug(`Thumb Width = ${size.width}px`)
+      // debug(`Thumb Margin = ${size.margin}px`)
+      debug(size, 'thumbSize')
       return size
     }
 
     function getWidth (space, number) {
       const margins = ((number * 2) + 2) * config.thumbs.margin
-      debug(`Margins = ${margins} Thumb`)
+      // debug(`Margins = ${margins} Thumb`)
       let width = space / (number + margins)
       return width
     }

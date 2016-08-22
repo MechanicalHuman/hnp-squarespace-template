@@ -47,6 +47,9 @@ function archiveNavController () {
     if (size.useMargins) {
       element.style.paddingRight = `${size.margin}px`
       element.style.paddingLeft = `${size.margin}px`
+    } else {
+      element.style.paddingRight = 'unset'
+      element.style.paddingLeft = 'unset'
     }
 
     utils.loadImages(element)
@@ -68,17 +71,17 @@ function archiveNavController () {
     const currentRow = Math.floor(viewport.width / (config.thumbs.default + currentMargin))
     const maxItems = Math.min(items.length, currentRow)
 
-    debug(`MAXITEMS: ${maxItems} -> ${currentRow}`)
+    // debug(`MAXITEMS: ${maxItems} -> ${currentRow}`)
 
     let columns = 1 // So it gets at least 2
     let width = 0 // do statements evaluate after the block
     let isMax = false
 
     do {
-      debug(`${columns} -> ${width}`)
+      // debug(`${columns} -> ${width}`)
       columns = columns + 1
       width = getWidth(viewport.width, columns)
-      debug(`${columns} -> ${width}`)
+      // debug(`${columns} -> ${width}`)
       if (columns >= items.length) {
         isMax = true
         debug('Max Column reached')
@@ -97,6 +100,9 @@ function archiveNavController () {
     size.margin = Math.floor(size.margin)
     size.radius = Math.floor(size.radius)
     size.useMargins = isMax
+
+    debug(size, 'thumbSize')
+
     return size
   }
 

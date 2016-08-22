@@ -10,4 +10,64 @@
   padding-left: @content-margin;
 
   max-width: @content-max-width;
+
+
+  .metadata {
+    .sans-regular;
+    .mobile({
+      font-size: 21px;
+    });
+
+    box-sizing: border-box;
+
+    padding-bottom: 6vh;
+
+    font-size: 26px;
+    .title {
+      .sans-condensed-bold;
+      .selectable;
+
+      box-sizing: border-box;
+    }
+    .description {
+      .sans-condensed;
+      .selectable;
+
+      box-sizing: border-box;
+
+      padding-bottom: @content-margin/2;
+
+      letter-spacing: 0.01em;
+    }
+    .year {
+      .sans-condensed-ligth;
+      .selectable;
+
+      box-sizing: border-box;
+
+      padding-bottom: @content-margin/2;
+
+      font-size: 0.8em;
+    }
+    .role {
+      .mono-regular;
+      .selectable;
+      .serif-italic;
+
+      box-sizing: border-box;
+
+      text-transform: lowercase;
+
+      letter-spacing: 0.01em;
+      color: lighten(@textColor, 25%);
+
+      font-size: 0.7em;
+      &:before {
+        content: 'role: ';
+      }
+      // &:after {
+      //   content: ' ]';
+      // }
+    }
+  }
 }

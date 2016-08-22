@@ -101,3 +101,31 @@ iframe {
     width: 100%;
   }
 }
+
+.home {
+  box-sizing: border-box;
+
+  margin-right: auto;
+  margin-left: auto;
+
+  padding-top: @content-margin * 2;
+  padding-right: @content-margin;
+  padding-bottom: @content-margin * 2;
+  padding-left: @content-margin;
+
+  max-width: @content-max-width;
+  .sqs-block {
+    /* ALL BLOCKS */
+    .sqs-block-content {
+      .sans-regular;
+      .base-text(32px);
+      .selectable;
+
+      text-align: center;
+      p {
+        .selectable;
+      }
+      /* All Contents*/
+    }
+  }
+}
