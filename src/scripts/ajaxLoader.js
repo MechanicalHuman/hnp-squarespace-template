@@ -7,6 +7,7 @@ const debug = require('debug')('hnp:ajax')
 
 const config = require('./config')
 const events = require('./events')
+const utils = require('./utils')
 
 var httpRequest
 var ajaxFired = false
@@ -182,6 +183,7 @@ function fireRequest (url) {
   events.emit('ajax:start')
   this.scrollToPosition(0, 0)
   this.modifyLinkState(url)
+  utils.setExternalLinks()
   this.destroySqsBlocks()
   this.ajax(url)
 }

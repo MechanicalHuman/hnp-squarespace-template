@@ -15,7 +15,9 @@ module.exports = {
   onAnimationEnd: onAnimationEnd,
   onAnimationIteration: onAnimationIteration,
   onResize: _throttledResize(),
-  makeCSSGradient: makeCSSGradient
+  makeCSSGradient: makeCSSGradient,
+  setActive: setActive,
+  setExternalLinks: setExternalLinks
 }
 
 /**
@@ -224,6 +226,27 @@ function makeCSSGradient (start, end, direction) {
   if (!direction) direction = 'left'
 
   return `${prefix}linear-gradient(${direction},${start},${end})`
+}
+
+function setActive () {
+  const url = window.location.pathname
+  const activeClass = config.ajax.activeNavClass
+  Array.prototype.forEach.call(document.querySelectorAll('.' + activeClass), function (el) {
+    el.classList.remove(activeClass)
+  })
+
+  Array.prototype.forEach.call(document.querySelectorAll('[href="' + url + '"]'), function (el) {
+    el.parentNode.classList.add(activeClass)
+  })
+}
+
+function setExternalLinks () {
+  const links = document.querySelectorAll('a[href]')
+  lodash.each(links, el => {
+    const url = el.getAttribute('href')
+    const isExternal = /(^http|^https)/
+    if (isExternal.test(url)) el.setAttribute('target', '_blank')
+  })
 }
 
 /**

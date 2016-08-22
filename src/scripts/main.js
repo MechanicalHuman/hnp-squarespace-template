@@ -57,6 +57,8 @@ window.addEventListener('DOMContentLoaded', run)
  */
 
 function run () {
+  utils.setActive()
+  utils.setExternalLinks()
   // Initialize the Ajax Loader.
   if (config.ajax.use) {
     debug('Using AJAX')
