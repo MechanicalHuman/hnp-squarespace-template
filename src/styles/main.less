@@ -114,18 +114,24 @@ iframe {
   padding-left: @content-margin;
 
   max-width: @content-max-width;
-  .sqs-block {
-    /* ALL BLOCKS */
-    .sqs-block-content {
-      .sans-regular;
-      .base-text(32px);
-      .selectable;
 
-      text-align: center;
+    .sqs-block-html,
+.sqs-block-markdown {
+
+    .sqs-block-content {
+
+
+      // text-align: left;
       p {
-        .selectable;
+         .mono-regular;
+      .selectable;
+         .base-text(16px);
+        &:before {
+          content: "> "
+        }
       }
       /* All Contents*/
     }
   }
+
 }
