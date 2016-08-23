@@ -115,23 +115,19 @@ iframe {
 
   max-width: @content-max-width;
 
-    .sqs-block-html,
-.sqs-block-markdown {
 
-    .sqs-block-content {
+  .sqs-block-markdown .sqs-block-content {
+    h1 {
+      .mono-ligth;
+      .base-text(14px);
 
-
-      // text-align: left;
-      p {
-         .mono-regular;
-      .selectable;
-         .base-text(16px);
-        &:before {
-          content: "> "
-        }
-      }
-      /* All Contents*/
+      user-select: none !important;
     }
+    p {
+      .mono-regular;
+      .selectable;
+      .base-text(16px);
+    }
+    /* All Contents*/
   }
-
 }

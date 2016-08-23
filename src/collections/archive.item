@@ -1,20 +1,19 @@
-{.section item}
 <!-- TODO: Add SQS content editable -->
-<figure class="hero-img content-fill" data-color='{colorData|json}' style="background-color: #{colorData.suggestedBgColor}" sqs-controller="Controllers.heroImage">
-     <img class="loading" {@|image-meta} />
+<figure class="hero-img content-fill" data-color='{item.colorData|json}' style="background-color: #{item.colorData.suggestedBgColor}" sqs-controller="Controllers.heroImage">
+     <img class="loading" {item|image-meta} />
 </figure>
-<article class="page-container">
+<article class="page-container" data-item-id="{item.id}" id="project-{item.id}">
     <section class="metadata">
-        <h1 class="title">{title}</h1>
-        <h3 class="description">{customContent.description}</h2>
-        <h4 class="year">{.equal? customContent.year ""}{addedOn|date %Y}{.or}{customContent.year}{.end}{.equal? customContent.client ""}{.or}, {customContent.client}{.end}</h3>
-        <h5 class="role">{.equal? customContent.role ""}{# dev/null}{.or}{customContent.role}{.end}</h3>
+        <h1 class="title" data-content-field="title">{item.title}</h1>
+        <h3 class="description">{item.customContent.description}</h2>
+        <h4 class="year">{.equal? item.customContent.year ""}{item.addedOn|date %Y}{.or}{item.customContent.year}{.end}{.equal? item.customContent.client ""}{.or}, {item.customContent.client}{.end}</h3>
+        <h5 class="role">{.equal? item.customContent.role ""}{# dev/null}{.or}{item.customContent.role}{.end}</h3>
     </section>
-    <section data-item-id="{item.id}">
-    {body}
+    <section class="content">
+    {item.body}
     </section>
 </article>
-<nav class="archive-wrapper darken" sqs-controller="Controllers.navigation.archive" data-current-id="{id}">
+<nav class="archive-wrapper darken" sqs-controller="Controllers.navigation.archive" data-current-id="{item.id}">
     <squarespace:query collection="{collection.urlId}" featured="true">
             <h1 class="archive-title">Similar? Selected?</h1>
             <div class="archive-scroll">
@@ -35,5 +34,3 @@
             </div>
     </squarespace:query>
 </nav>
-
-{.end}

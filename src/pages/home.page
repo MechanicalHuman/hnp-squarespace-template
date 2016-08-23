@@ -1,7 +1,7 @@
 <squarespace:block-field id="homepage" class="home" columns="12"/>
 <squarespace:query collection="archive" featured="true">
-    <div class="archive-wrapper">
-        <h1 class="archive-title">Selected Works</h1>
+    <div class="archive-wrapper" data-collection-id="archive">
+        <h1 class="archive-title" id="selectedworks">Selected Works</h1>
         {@|apply thumbnails.block}
     </div>
 </squarespace:query>

@@ -183,7 +183,6 @@ function fireRequest (url) {
   events.emit('ajax:start')
   this.scrollToPosition(0, 0)
   this.modifyLinkState(url)
-  utils.setExternalLinks()
   this.destroySqsBlocks()
   this.ajax(url)
 }
@@ -209,7 +208,7 @@ function handleRequest (url) {
           this.replaceHistory()
           this.updateHistory(url, document.querySelector('title').textContent)
         }
-        this.updatePage(pageData)
+        this.updatePage(pageData, url)
       }
     } else {
       this.handleTimeout(url)
@@ -259,7 +258,7 @@ function createDummyDom (data) {
   return dataObj
 }
 
-function updatePage (data) {
+function updatePage (data, url) {
   var body = document.querySelector('body')
   var head = document.querySelector('head')
 
@@ -277,9 +276,11 @@ function updatePage (data) {
 
   this.initializeSqsBlocks()
   this.refireTemplateControllers()
-
+  utils.setExternalLinks()
   // Determine scroll position - if coming from a link click, go to top, else, scroll to history position
+  if (/(#.*)/.test(url)) window.location.href = /(#.*)/.exec(url)[1]
   if (currentEvent.type === 'click') this.replaceHistory()
+
   ajaxFired = false
   events.emit('ajax:end')
 }
