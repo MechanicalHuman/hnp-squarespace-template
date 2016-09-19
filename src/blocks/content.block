@@ -3,10 +3,10 @@
 
 {.equal? @type "archive"}
 
-<nav id="{collection.typeName}" class="content-wrapper">
+<article id="{collection.typeName}" class="content-wrapper">
     <!-- Squarespace mainContent -->
     {squarespace.main-content}
-</nav>
+</article>
 
 {.or}{.equal? @type "page"}
 

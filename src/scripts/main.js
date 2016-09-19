@@ -36,7 +36,7 @@ window.Controllers = {
 // ///////////////////////////////
 
 // Enable or disable the debug functionality.
-if (config.debug) DEBUG.enable('hnp:*')
+if (config.debug) DEBUG.enable('hnp:*, -hnp:controllers:nav*')
 if (!config.debug) DEBUG.disable()
 
 // If we are using the AJAX loader

@@ -15,7 +15,7 @@
 </article>
 <nav class="archive-wrapper darken" sqs-controller="Controllers.navigation.archive" data-current-id="{item.id}">
     <squarespace:query collection="{collection.urlId}" featured="true">
-            <h1 class="archive-title">Similar? Selected?</h1>
+            <h1 class="archive-title">More Projects</h1>
             <div class="archive-scroll">
                 {.repeated section items}
                 <article id="archive-{urlId}" class="archive-item" data-item-id="{id}" data-url-id="{urlId}">
