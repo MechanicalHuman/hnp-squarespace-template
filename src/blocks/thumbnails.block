@@ -2,9 +2,15 @@
     {.repeated section items}
     <article id="archive-{urlId}" class="archive-item" data-item-id="{id}" data-url-id="{urlId}">
         <a class="archive-item-image-wrap" href="{fullUrl}" >
+            {.if customContent.thumb}
+            <figure class="archive-item-image content-fill" style="background-color: #{customContent.thumb.colorData.suggestedBgColor}">
+                <img class="loading" {customContent.thumb|image-meta} />
+            </figure>
+            {.or}
             <figure class="archive-item-image content-fill" style="background-color: #{colorData.suggestedBgColor}">
                 <img class="loading" {@|image-meta} />
             </figure>
+            {.end}
         </a>
         <a class="archive-item-meta" href="{fullUrl}">
             <h2 class="archive-item-title selectable">{title}</h2>
