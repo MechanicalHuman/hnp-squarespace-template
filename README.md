@@ -33,6 +33,8 @@ git clone git@github.com:MechanicalHuman/ego-squarespace-portfolio.git ego-squar
 
 ## Changelog
 
+Find the CHANGELOG [here](CHANGELOG.md), generated using Conventional Commits.
+
 ## License
 
 [MIT](LICENSE) © [Cactus Technologies LLC](http://www.cactus.is)
