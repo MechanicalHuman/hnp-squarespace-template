@@ -9,9 +9,6 @@
 ## Table of contents
 
 - [Installation](#installation)
-- [Usage](#usage)
-- [API](#api)
-- [Maintainers](#maintainers)
 - [Changelog](#changelog)
 - [License](#license)
 
@@ -23,18 +20,10 @@ git clone git@github.com:MechanicalHuman/ego-squarespace-portfolio.git ego-squar
   npm install
 ```
 
-## Usage
-
-## API
-
-## Maintainers
-
-- [Jorge Proaño](http://www.hidden-node-problem.com)
-
 ## Changelog
 
 Find the CHANGELOG [here](CHANGELOG.md), generated using Conventional Commits.
 
 ## License
 
-[MIT](LICENSE) © [Cactus Technologies LLC](http://www.cactus.is)
+[MIT](LICENSE) © [Jorge Proaño](https://www.hidden-node-problem.com)

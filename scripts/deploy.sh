@@ -2,8 +2,6 @@
 
 MESSAGE=$(git log -1 --pretty=%B)
 
-tabname $npm_lifecycle_event
-
 cd ./template
 git add .
 git commit -m "$MESSAGE"

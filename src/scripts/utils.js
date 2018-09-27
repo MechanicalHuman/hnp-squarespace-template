@@ -199,7 +199,7 @@ function onAnimationIteration (element, callback) {
 }
 
 /**
- * Returns a broser aware CSS gradient String
+ * Returns a browser aware CSS gradient String
  *
  * @method    makeCSSGradient
  * @param     {String}           start

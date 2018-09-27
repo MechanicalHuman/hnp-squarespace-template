@@ -6,20 +6,20 @@
   height: 100vh;
   html.portrait & {
     height: 66vh;
-  };
+  }
   html.portrait.ipad & {
     height: 75vh;
-  };
+  }
   html.portrait.iphone & {
     height: 66vh;
-  };
+  }
   html.landscape & {
     height: 85vh;
-  };
+  }
   html.landscape.iphone & {
     height: calc(~'~"100vh - @{iphone-bars}"');
-  };
+  }
   html.landscape.ipad & {
     height: calc(~'~"100vh - @{footer-heigth}  + 20px"');
-  };
+  }
 }

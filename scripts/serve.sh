@@ -5,10 +5,8 @@ URL=$npm_package_config_squarespace_url
 PORT=$npm_package_config_server_port
 TEMPLATE=./template/
 
-tabname $npm_lifecycle_event
-
 if [ "$USE_AUTH" = true ]; then
-    squarespace-server $URL --port=$PORT --template-directory=$TEMPLATE --run-authenticated
+	squarespace-server $URL --port=$PORT --directory=$TEMPLATE --auth
 else
-    squarespace-server $URL --port=$PORT --template-directory=$TEMPLATE
+	squarespace-server $URL --port=$PORT --directory=$TEMPLATE
 fi
