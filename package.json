@@ -1,18 +1,22 @@
 {
   "name": "@mechanicalhuman/hnp-squarespace",
   "version": "1.0.0",
+  "private": true,
   "description": "Squarespace template for hiddennodeproblem.com",
   "homepage": "https://github.com/MechanicalHuman/dev-squarespace-local#readme",
   "bugs": {
     "url": "https://github.com/MechanicalHuman/dev-squarespace-local/issues"
   },
-  "license": "MIT",
-  "author": "Jorge Proaño <jorge@hiddennodeproblem.com> (https://www.hidden-node-problem.com/)",
-  "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MechanicalHuman/dev-squarespace-local.git"
+    "url": "git@github.com:MechanicalHuman/ego-squarespace-portfolio.git"
   },
+  "license": "MIT",
+  "author": "Cactus Technologies LLC <hi@cactus.is> (http://www.cactus.is)",
+  "contributors": [
+    "Jorge Proaño <jorge@hiddennodeproblem.com> (http://www.hidden-node-problem.com)"
+  ],
+  "main": "index.js",
   "scripts": {
     "prebuild": "rm -rf template/*",
     "build": "npm-run-all --parallel build:*  --silent",
@@ -36,29 +40,28 @@
     "reload_port": "9000",
     "reload_ui_port": "9001",
     "server_port": "8080",
-    "squarespace_auth": false,
+    "squarespace_auth": true,
     "squarespace_git": "https://jorge-proao-rb8e.squarespace.com/template.git",
     "squarespace_url": "https://jorge-proao-rb8e.squarespace.com"
   },
   "dependencies": {
-    "@squarespace/squarespace-server": "^0.4.3",
-    "autoprefixer": "^6.3.7",
-    "babel-preset-es2015": "^6.9.0",
+    "@squarespace/server": "^1.1.2",
+    "autoprefixer": "^9.1.5",
+    "babel-preset-es2015": "^6.24.1",
     "babelify": "^7.3.0",
-    "browser-sync": "^2.13.0",
+    "browser-sync": "^2.24.7",
     "browser-sync-logger": "^1.0.3",
-    "browserify": "^13.1.0",
-    "debug": "^2.2.0",
-    "leasot": "^3.2.2",
-    "less": "^2.7.1",
-    "less-plugin-autoprefix": "^1.5.1",
-    "lodash": "^4.14.0",
-    "npm-run-all": "^3.0.0",
+    "browserify": "^16.2.3",
+    "debug": "^4.0.1",
+    "leasot": "^6.6.2",
+    "less": "^3.8.1",
+    "less-plugin-autoprefix": "^2.0.0",
+    "lodash": "^4.17.11",
+    "npm-run-all": "^4.1.3",
     "tinycolor2": "^1.4.1",
-    "watch": "^0.19.1",
-    "watchify": "^3.7.0"
+    "watch": "^1.0.2",
+    "watchify": "^3.11.0"
   },
-  "private": false,
   "standard": {
     "globals": [
       "SQS"
