@@ -3,7 +3,7 @@
 
 {.equal? @type "archive"}
 
-<article id="{collection.typeName}" class="content-wrapper">
+<article id="{collection.typeName}" class="content-wrapper" data-content-field="main-content">
     <!-- Squarespace mainContent -->
     {squarespace.main-content}
 </article>
