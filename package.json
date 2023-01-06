@@ -45,7 +45,7 @@
     "@squarespace/server": "^1.1.2",
     "autoprefixer": "^9.1.5",
     "babel-preset-es2015": "^6.24.1",
-    "babelify": "^7.3.0",
+    "babelify": "^10.0.0",
     "browser-sync": "^2.24.7",
     "browser-sync-logger": "^1.0.3",
     "browserify": "^16.2.3",
